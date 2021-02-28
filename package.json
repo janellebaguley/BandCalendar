@@ -2,6 +2,8 @@
   "name": "big-calendar",
   "version": "0.1.0",
   "private": true,
+  "main": "server/index.js",
+  "proxy": "http://localhost:3456",
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@testing-library/jest-dom": "^5.11.9",
@@ -13,6 +15,8 @@
     "date-fns": "^2.17.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "massive": "^6.7.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-redux": "^7.2.2",

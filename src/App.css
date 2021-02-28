@@ -91,9 +91,10 @@ button:hover {
   transform: scale(1.25);
   transition: .25s ease-out;
 }
-/* .fr {
-  float: right;
-} */
+.col-center{
+ margin: 0 0 0 10px;
+}
+
 
 
 /* GRID */
@@ -241,7 +242,7 @@ button:hover {
   margin-top: 5px;
   background: rgba(3, 252, 177, 0.2);
   font-size: small;
-  color: #1D3557;
+  color: #F1FAEE;
 }
 .overflow-banner {
   z-index: 2;
@@ -271,7 +272,7 @@ button:hover {
 }
 .event-subject {
   font-weight: bolder;
-  color: #1D3557;
+  color: #F1FAEE;
 }
 .event-card .card-title {
   max-width: 85%;

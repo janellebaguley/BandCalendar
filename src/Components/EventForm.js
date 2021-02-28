@@ -1,7 +1,9 @@
 
+import axios from 'axios';
 import React, {useState, useContext} from 'react'
 import {EventScheduleContext} from './Calendar'
 import {isTimeStrInAscendingOrder, convertDateObjToTimeString, convertTimeStringToDateObj} from './General'
+// import axios from 'axios'
 
 function EventForm(props) {
     const eventDetails = props.event || {};
@@ -19,7 +21,7 @@ function EventForm(props) {
         let subjectError = '';
         let timeError = '';
         if (subject.trim() === ''){
-            subjectError = 'Subject cannot be empty';
+            subjectError = "Subject can't be empty";
             isValid = false;
         }
         if (startTimeString.trim() === '' || endTimeString.trim() === ''){
@@ -39,6 +41,7 @@ function EventForm(props) {
     const handleFormSubmit = (ev) => {
         ev.preventDefault();
         const isValid = validateForm();
+        
         if (isValid){
             const dispatchType = eventDetails.uid ? 'EDIT_EVENT' : 'ADD_EVENT';
             const uid = eventDetails.uid;
@@ -50,6 +53,7 @@ function EventForm(props) {
                 startDateTime : convertTimeStringToDateObj(startTimeString, props.date), //converting the time string back to a dateTime object
                 endDateTime : convertTimeStringToDateObj(endTimeString, props.date), //converting the time string back to a dateTime object
             };
+            axios.post('/api/submit', event)
             eventScheduleContext.eventScheduleDispatch({
                 type : dispatchType,
                 event : event
@@ -61,67 +65,67 @@ function EventForm(props) {
     return (
         <li className='event-card'>
             <form className='event-form' onSubmit={handleFormSubmit}>
-                <span className="form-row">
-                    <label htmlFor="subject">Subject<span className="mandatory-field">*</span></label>
+                <span className='form-row'>
+                    <label htmlFor='subject'>Subject<span className='mandatory-field'>*</span></label>
                     <input
-                        name="subject"
-                        type="type"
-                        maxLength="30"
+                        name='subject'
+                        type='type'
+                        maxLength='30'
                         placeholder={'Event subject'}
                         autoFocus={true}
                         value={subject}
                         onChange={(ev) => setSubject(ev.target.value)}
-                        aria-label="subject"
+                        aria-label='subject'
                     />
                 </span>
                 {subjectErrorMessage && 
-                    <div className="form-validation-error" data-testid="subjectErrorMessage">{subjectErrorMessage}</div>
+                    <div className='form-validation-error' data-testid='subjectErrorMessage'>{subjectErrorMessage}</div>
                 }
-                <span className="form-row">
-                    <label htmlFor="startTime">Start time<span className="mandatory-field">*</span></label>
+                <span className='form-row'>
+                    <label htmlFor='startTime'>Start time<span className='mandatory-field'>*</span></label>
                     <input
-                        className="mr10"
-                        name="startTime"
-                        type="time"
+                        className='mr10'
+                        name='startTime'
+                        type='time'
                         value={startTimeString}
                         onChange={(ev) => setStartTimeString(ev.target.value)}
-                        aria-label="startTime"
+                        aria-label='startTime'
                     />
-                    <label htmlFor="endTime">End time<span className="mandatory-field">*</span></label>
+                    <label htmlFor='endTime'>End time<span className='mandatory-field'>*</span></label>
                     <input
-                        name="endTime"
-                        type="time"
+                        name='endTime'
+                        type='time'
                         value={endTimeString}
                         onChange={(ev) => setEndTimeString(ev.target.value)}
-                        aria-label="endTime"
+                        aria-label='endTime'
                     />
                 </span>
                 {timeErrorMessage && 
-                    <div className="form-validation-error" data-testid="timeErrorMessage">{timeErrorMessage}</div>
+                    <div className='form-validation-error' data-testid='timeErrorMessage'>{timeErrorMessage}</div>
                 }
-                <span className="form-row">
-                    <label htmlFor="location">Location</label>
+                <span className='form-row'>
+                    <label htmlFor='location'>Location</label>
                     <input
-                        name="location"
-                        type="text"
+                        name='location'
+                        type='text'
                         value={location}
                         onChange={(ev) => setLocation(ev.target.value)}
-                        aria-label="location"
+                        aria-label='location'
                     />
                 </span>
-                <span className="form-row">
-                    <label htmlFor="description">Description</label>
+                <span className='form-row'>
+                    <label htmlFor='description'>Description</label>
                     <textarea
-                        name="description"
-                        type="text"
+                        name='description'
+                        type='text'
                         value={description}
                         onChange={(ev) => setDescription(ev.target.value)}
-                        aria-label="description"
+                        aria-label='description'
                     />
                 </span>
 
-                <button type="submit" className="mr10 btn-primary" data-testid="submitEventForm">Save</button>
-                <button type="cancel" onClick={() => props.closeFormCallBack()}>Cancel</button>
+                <button type='submit' className='mr10 btn-primary' data-testid='submitEventForm'>Save</button>
+                <button type='cancel' onClick={() => props.closeFormCallBack()}>Cancel</button>
             </form>
         </li>
     )

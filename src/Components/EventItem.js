@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react';
-import { EventScheduleContext } from './Calendar';
+import {EventScheduleContext} from './Calendar';
 import EventForm from './EventForm';
 import EventCard from './EventCard';
 

@@ -2,7 +2,7 @@ import {format} from 'date-fns';
 import {DATE_FORMAT} from './DateFormat';
 
 const rearrangeMapByEarliest = (map) => {
-    // JS Objects retain the order in which keys are added... If this fails in some browsers, rewrite this to maintain the order as a seperate array.
+    
     const listOfKeys = Object.keys(map);
     const rearrangedMap = {};
     const sortedListOfKeys = listOfKeys.sort((a, b) => {
@@ -59,18 +59,6 @@ export const isTimeStrInAscendingOrder = (a, b) => {
     return (comparisonResult < 0);
 }
 
-
-/* 
-Construsts a tree with the event details for easy, quick access --
-y_YYYY : {
-    m_MM : {
-        d_DD: [
-            { event_1_UID : event_1 },
-            { event_2_UID : event_2 }
-        ]
-    }
-}
-*/
 export const insertIntoFormattedEventsObj = (formattedEventsObj, event) => {
     const dateObj = event.startDateTime;
     const year_key = `y_${format(dateObj, DATE_FORMAT.fullYear)}`;

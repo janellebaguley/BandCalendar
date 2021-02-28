@@ -7,7 +7,7 @@ function EventCard(props) {
         <div className='event-card'>
             <div className='flex-bx flex-between row-middle pb5'>
                 <div className='card-title'>
-                    <span className='event-subject mr10'>{props.event.subject}</span>
+                    <span className='event-subject mr10'> {props.event.subject} </span>
                     {props.event.startDateTime &&
                         <span>{format(props.event.startDateTime, DATE_FORMAT.timeStr_12Hr)} - {format(props.event.endDateTime, DATE_FORMAT.timeStr_12Hr)}</span>
                     }
@@ -19,6 +19,7 @@ function EventCard(props) {
                     </div>
                 }
             </div>
+            <section>
             {props.event.location && 
                 <div className='flex-bx row-middle pb5'>
                     <span className="icon">location_on</span>
@@ -27,7 +28,7 @@ function EventCard(props) {
             }
             {props.event.description && 
                 <span>{props.event.description}</span>
-            }
+            }</section>
         </div>
     )
 }
