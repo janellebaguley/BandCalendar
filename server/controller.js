@@ -1,8 +1,15 @@
 module.exports = {
-    getCalEvents:  async (req, res) => {
+    getEventsDay:  async (req, res) => {
         const db = req.app.get('db')
 
-        await db.get_events()
+        await db.get_day(day)
+        .then(event => res.status(200).send(event))
+        .catch(err => res.status(500).send(err))
+    },
+    getEventsMonth:  async (req, res) => {
+        const db = req.app.get('db')
+
+        await db.get_events(month)
         .then(event => res.status(200).send(event))
         .catch(err => res.status(500).send(err))
     },
@@ -15,6 +22,15 @@ module.exports = {
         .then(() => res.sendstatus(200))
         .catch(err => res.status(500).send(err))
     },
+    editEvent: (req,res) => {
+        const {id} = req.params
+        const{title, location} = req.body
+        const db = req.app.get('db')
+
+        db.update_event({id, title, location})
+        .then(() => res.sendstatus(200))
+        .catch(err => res.status(500).send(err))
+    },
     searchEvent: (req, res)=> {
         const db = req.app.get('db')
         const {title, location} = req.body
@@ -24,10 +40,10 @@ module.exports = {
         .catch(err => res.status(500).send(err))
     },
     deleteEvent: (req, res) => {
-        const {event_id, user_Id} = req.params
+        const {id} = req.params
         const db = req.app.get('db')
 
-        db.delete_event(event_id, user_id)
+        db.delete_event({id})
         .then(() => res.sendstatus(200))
         .catch(err => res.status(500).send(err))
     },

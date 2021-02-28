@@ -19,8 +19,10 @@ massive({
 
 app.get('/auth/session-user', ctrl.getSessionUser)
 
-app.get('/api/events/', ctrl.getCalEvents)
+app.get('/api/events/', ctrl.getEventsDay)
+app.get('/api/events/', ctrl.getEventsMonth)
 app.put('/api/search', ctrl.searchEvent)
+app.put('/api/event/:id', ctrl.editEvent)
 app.post('/api/submit/:user-id', ctrl.addEvents)
 app.delete('/api/event/:event_id', ctrl.deleteEvent)
 
