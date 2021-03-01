@@ -2,20 +2,20 @@
 import uuid from '../Components/uuid';
 import {getEventsScheduledForDate, insertIntoFormattedEventsObj} from '../Components/General';
 import {setEventsToLocalStorage} from '../Components/Local';
-import axios from 'axios'
+
 
 export const eventScheduler = (state, action) => {
     let newState = {...state};
     
     const deleteEventFromDate = (event) => {
         let eventsObjForDate = getEventsScheduledForDate(newState, event.startDateTime);
-        // delete eventsObjForDate[event.uid];
-        axios.delete(`/api/event/${eventsObjForDate[event.uid]}`)
+        delete eventsObjForDate[event.uid];
+        // axios.delete(`/api/event/${eventsObjForDate[event.uid]}`)
     };
 
     const addEditEventForDate = (event) => {
-        axios.put(`/api/event/${id}`,
-        insertIntoFormattedEventsObj)(newState, event);
+        
+        insertIntoFormattedEventsObj(newState, event);
     };
     
     switch (action.type) {

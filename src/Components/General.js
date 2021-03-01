@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {format} from 'date-fns';
 import {DATE_FORMAT} from './DateFormat';
 
@@ -32,7 +33,9 @@ export const getEventsScheduledForMonth = (eventSchedule, dateObj) => {
     if (eventSchedule[year_key] && eventSchedule[year_key][month_key]){
         eventsObj = eventSchedule[year_key][month_key];
     }
-    return eventsObj;
+    axios.get('/api/events', eventsObj)
+    .then(() => {})
+    .catch(err => console.log(err))
 };
 
 export const get12HourTimeString = (_24HrTimeString) => {
